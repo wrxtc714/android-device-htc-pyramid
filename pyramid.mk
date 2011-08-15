@@ -32,8 +32,8 @@ PRODUCT_COPY_FILES += \
     device/htc/pyramid/init:root/init \
     device/htc/pyramid/init.rc:root/init.rc \
     device/htc/pyramid/ueventd.rc:root/ueventd.rc \
-    device/htc/pyraid/init.pyramid.rc:root/init.pyramid.rc \
-    device/htc/shooter/ueventd.pyramid.rc:root/ueventd.pyramid.rc
+    device/htc/pyramid/init.pyramid.rc:root/init.pyramid.rc \
+    device/htc/pyramid/ueventd.pyramid.rc:root/ueventd.pyramid.rc
 
 ## (2) Also get non-open-source GSM-specific aspects if available
 $(call inherit-product-if-exists, vendor/htc/pyramid/pyramid-vendor.mk)
@@ -41,12 +41,6 @@ $(call inherit-product-if-exists, vendor/htc/pyramid/pyramid-vendor.mk)
 ## (3)  Finally, the least specific parts, i.e. the non-GSM-specific aspects
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.com.google.clientidbase=android-htc \
-	ro.com.google.locationfeatures=1 \
- 	ro.com.google.networklocation=1 \
- 	ro.com.google.gmsversion=2.3_r3 \
-	ro.setupwizard.enable_bypass=1 \
-	dalvik.vm.lockprof.threshold=500 \
-	dalvik.vm.dexopt-flags=m=y \
 
 DEVICE_PACKAGE_OVERLAYS += device/htc/pyramid/overlay
 
@@ -63,17 +57,11 @@ PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
 
 PRODUCT_PACKAGES += \
-#    gps.pyramid \
-#    librs_jni \
-#    gralloc.msm8660 \
-#    copybit.msm8660 \
-#    overlay.default \
     librs_jni \
-#    libOmxCore \
     libOmxVenc \
     libOmxVdec \
-#    libaudio \
-    com.android.future.usb.accessory
+    com.android.future.usb.accessory 
+
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
@@ -118,13 +106,11 @@ PRODUCT_COPY_FILES += \
     device/htc/pyramid/dsp/soundimage/srsfx_trumedia_51.cfg:system/etc/soundimage/srsfx_trumedia_51.cfg \
     device/htc/pyramid/dsp/soundimage/srsfx_trumedia_movie.cfg:system/etc/soundimage/srsfx_trumedia_movie.cfg \
     device/htc/pyramid/dsp/soundimage/srsfx_trumedia_music.cfg:system/etc/soundimage/srsfx_trumedia_music.cfg \
-    device/htc/pyramid/prebuilt/snd3254:system/bin/snd3254
+    device/htc/pyramid/prebuilt/sound8x60:system/bin/sound8x60
 
 # Wifi Module
 PRODUCT_COPY_FILES += \
     device/htc/pyramid/modules/bcm4329.ko:system/lib/modules/bcm4329.ko \
-    device/htc/pyramid/modules/kineto_gan.ko:system/lib/modules/kineto_gan.ko \
-    device/htc/pyramid/modules/tun.ko:system/lib/modules/tun.ko \
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise

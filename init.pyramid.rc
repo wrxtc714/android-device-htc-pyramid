@@ -102,20 +102,13 @@ on boot
 	# for simlock
 	chown radio radio /dev/simlock
 	chmod 0660 /dev/simlock
-	
-
-	#Permission edit for RescueStart 
-	chown nobody.shell ./RescueStarter
-  chmod 755 ./RescueStarter
-  chown nobody.shell ./RescueServer
-  chmod 755 ./RescueServer
 
 	# for charging function
 	chown radio radio /sys/module/htc_battery_8x60/parameters/phone_call
 	chmod 0660 /sys/module/htc_battery_8x60/parameters/phone_call
 
     # Load kineto_gan.ko while booting
-    insmod /system/lib/modules/kineto_gan.ko
+    #insmod /system/lib/modules/kineto_gan.ko
 
 	# Discretix DRM
 #    mkdir /data/DxDrm
@@ -262,7 +255,7 @@ service dcvs1 /system/bin/dcvs --cpu=1 --slacktime=16
     user root
     disabled
 
-service mpdecision /system/bin/mpdecision --no_sleep --avg_comp
+service mpdecision /system/bin/mpdecision --no_sleep --avg_comp --single_core_while_panel_off
     user root
     disabled
 
@@ -286,14 +279,7 @@ service htc_ebdlogd_rel /system/bin/htc_ebdlogd -s -k
     oneshot
     ioprio idle 0
 
-# Discretix DRM
-#service dx_drm_server /system/bin/DxDrmServerIpc -f -o allow_other /data/DxDrm/fuse
 
-#Service initiation command for RescueStart for Voda UK only
-service RescueStarter /system/bin/RescueStarter
-	user nobody
-	group input graphics
-	
 on property:ro.build.tags=test-keys
     start htc_ebdlogd
 

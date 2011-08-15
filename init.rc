@@ -171,6 +171,7 @@ on post-fs
     mkdir /data/app-private 0771 system system
     mkdir /data/app 0771 system system
     mkdir /data/property 0700 root root
+    copy /system/etc/adreno_config.txt /data/local/tmp/adreno_config.txt
 
     mkdir /cache/download 0771 system cache
 
@@ -205,6 +206,7 @@ on boot
 
 # set RLIMIT_NICE to allow priorities from 19 to -20
     setrlimit 13 40 40
+    setrlimit 8 268435456 268435456    
 
 # Define the oom_adj values for the classes of processes that can be
 # killed by the kernel.  These are used in ActivityManagerService.

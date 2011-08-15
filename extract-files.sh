@@ -52,22 +52,22 @@ adb pull /system/lib/egl/libEGL_adreno200.so ../../../vendor/htc/$DEVICE/proprie
 adb pull /system/lib/egl/libGLESv1_CM_adreno200.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/egl/libGLESv2_adreno200.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/egl/libq3dtools_adreno200.so ../../../vendor/htc/$DEVICE/proprietary
-
 adb pull /system/lib/libacdbloader.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libacdbmapper.so ../../../vendor/htc/$DEVICE/proprietary
-adb pull /system/lib/libaudioalsa.so ../../../vendor/htc/$DEVICE/proprietary
+
+adb pull /system/lib/libOpenVG.so ../../../vendor/htc/$DEVICE/proprietary
+adb pull /system/lib/libC2D2.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libcamera.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libdiag.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libdll.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libdsutils.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libdsi_netctrl.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libgemini.so ../../../vendor/htc/$DEVICE/proprietary
-adb pull /system/lib/libganril.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libgsl.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libhtc_acoustic.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libhtc_ril.so ../../../vendor/htc/$DEVICE/proprietary
+adb pull /system/lib/libhtc_ril_switch.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libidl.so ../../../vendor/htc/$DEVICE/proprietary
-adb pull /system/lib/libkineto.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libmmipl.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libmmjpeg.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libmpl.so ../../../vendor/htc/$DEVICE/proprietary
@@ -84,8 +84,6 @@ adb pull /system/lib/libqdp.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libqmi.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libqmiservices.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libril.so ../../../vendor/htc/$DEVICE/proprietary
-adb pull /system/lib/librilswitch.so ../../../vendor/htc/$DEVICE/proprietary
-
 adb pull /system/lib/hw/copybit.msm8660.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/hw/gps.pyramid.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/hw/gralloc.default.so ../../../vendor/htc/$DEVICE/proprietary
@@ -93,7 +91,9 @@ adb pull /system/lib/hw/gralloc.msm8660.so ../../../vendor/htc/$DEVICE/proprieta
 adb pull /system/lib/hw/lights.msm8660.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/hw/overlay.default.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/hw/sensors.pyramid.so ../../../vendor/htc/$DEVICE/proprietary
-
+adb pull /system/lib/libaudcal.so ../../../vendor/htc/$DEVICE/proprietary
+adb pull /system/lib/libaudcalwb.so ../../../vendor/htc/$DEVICE/proprietary
+adb pull /system/lib/libaudcal_nel.so ../../../vendor/htc/$DEVICE/proprietary
 (cat << EOF) | sed s/__DEVICE__/$DEVICE/g > ../../../vendor/htc/$DEVICE/$DEVICE-vendor-blobs.mk
 # Copyright (C) 2010 The Android Open Source Project
 #
@@ -114,7 +114,6 @@ adb pull /system/lib/hw/sensors.pyramid.so ../../../vendor/htc/$DEVICE/proprieta
 # Prebuilt libraries that are needed to build open-source libraries
 PRODUCT_COPY_FILES += \\
     vendor/htc/__DEVICE__/proprietary/libcamera.so:obj/lib/libcamera.so \\
-    vendor/htc/__DEVICE__/proprietary/libaudioalsa.so:obj/lib/libaudioalsa.so \\
     vendor/htc/__DEVICE__/proprietary/libacdbloader.so:obj/lib/libacdbloader.so \\
     vendor/htc/__DEVICE__/proprietary/libacdbmapper.so:obj/lib/libacdbmapper.so \\
     vendor/htc/__DEVICE__/proprietary/libril.so:obj/lib/libril.so
@@ -157,7 +156,8 @@ PRODUCT_COPY_FILES += \\
     vendor/htc/__DEVICE__/proprietary/libOmxVenc.so:/system/lib/libOmxVenc.so \\
     vendor/htc/__DEVICE__/proprietary/libacdbloader.so:/system/lib/libacdbloader.so \\
     vendor/htc/__DEVICE__/proprietary/libacdbmapper.so:/system/lib/libacdbmapper.so \\
-    vendor/htc/__DEVICE__/proprietary/libaudioalsa.so:/system/lib/libaudioalsa.so \\
+    vendor/htc/__DEVICE__/proprietary/libC2D2.so:/system/lib/libC2D2.so \\
+    vendor/htc/__DEVICE__/proprietary/libOpenVG.so:/system/lib/libOpenVG.so \\
     vendor/htc/__DEVICE__/proprietary/libcamera.so:/system/lib/libcamera.so \\
     vendor/htc/__DEVICE__/proprietary/libdiag.so:/system/lib/libdiag.so \\
     vendor/htc/__DEVICE__/proprietary/libdll.so:/system/lib/libdll.so \\
@@ -171,8 +171,6 @@ PRODUCT_COPY_FILES += \\
     vendor/htc/__DEVICE__/proprietary/libril.so:/system/lib/libril.so \\
     vendor/htc/__DEVICE__/proprietary/libhtc_ril_switch.so:/system/lib/libhtc_ril_switch.so \\
     vendor/htc/__DEVICE__/proprietary/liboverlay.so:/system/lib/liboverlay.so \\
-    vendor/htc/__DEVICE__/proprietary/libganril.so:/system/lib/libganril.so \\
-    vendor/htc/__DEVICE__/proprietary/libkineto.so:/system/lib/libkineto.so \\
     vendor/htc/__DEVICE__/proprietary/libmmipl.so:/system/lib/libmmipl.so \\
     vendor/htc/__DEVICE__/proprietary/libmmjpeg.so:/system/lib/libmmjpeg.so \\
     vendor/htc/__DEVICE__/proprietary/libmpl.so:/system/lib/libmpl.so \\
@@ -183,6 +181,9 @@ PRODUCT_COPY_FILES += \\
     vendor/htc/__DEVICE__/proprietary/liboemcamera.so:/system/lib/liboemcamera.so \\
     vendor/htc/__DEVICE__/proprietary/libqdp.so:/system/lib/libqdp.so \\
     vendor/htc/__DEVICE__/proprietary/libqmi.so:/system/lib/libqmi.so \\
+    vendor/htc/__DEVICE__/proprietary/libaudcal.so:/system/lib/libaudcal.so \\
+    vendor/htc/__DEVICE__/proprietary/libaudcalwb.so:/system/lib/libaudcalwb.so \\
+    vendor/htc/__DEVICE__/proprietary/libaudcal_nel.so:/system/lib/libaudcal_nel.so \\
     vendor/htc/__DEVICE__/proprietary/libqmiservices.so:/system/lib/libqmiservices.so \\
     vendor/htc/__DEVICE__/proprietary/vpimg:/system/etc/vpimg \\
     vendor/htc/__DEVICE__/proprietary/gralloc.msm8660.so:/system/lib/hw/gralloc.msm8660.so \\
